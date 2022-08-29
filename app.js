@@ -19,10 +19,22 @@ maxNum.textContent = max;
 
 guessBtn.addEventListener('click', checkNumber);
 
-const numberToGuest = Math.floor(Math.random() * 10) + 1;
+
+// Play Agian event listener
+
+game.addEventListener('mousedown', function(e){
+      if (e.target.className === 'play-again'){
+            window.location.reload();
+      }
+});
+
+const numberToGuest = getRandomNumber(min, max); 
 console.log(numberToGuest);
 
 
+function getRandomNumber(minN, maxN) {
+      return Math.floor(Math.random() * (maxN-minN + minN));
+}
 
 function checkNumber(e){
       let guess = parseInt(guessNumber.value);
@@ -47,6 +59,8 @@ function checkNumber(e){
 function showGuessResult(msg, color) {
       guessNumber.disabled = true;
       guessNumber.style.borderColor = color;
+      guessBtn.value = 'Play Again';
+      guessBtn.className += 'play-again';
       setMessage(msg,color);
 }
 
